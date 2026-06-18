@@ -28,4 +28,3 @@ Use this skill whenever the change affects generated map code.
 - Run `npm run compile-ts`.
 - Check all affected export languages, not only the language in the reported bug.
 - For export text changes, inspect generated code for a simple frame, a button-like frame with callbacks, a tooltip case, and an array case when relevant.
-

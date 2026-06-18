@@ -1,38 +1,41 @@
-## graphify
+## Warcraft III Reforged UI Designer
 
-This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+Electron/TypeScript desktop app for designing WC3 UI frames and exporting JASS, Lua, or TypeScript for maps.
 
-When the user types `/graphify`, invoke the `skill` tool with `skill: "graphify"` before doing anything else.
+Detailed Cursor rules: [`.cursor/rules/`](.cursor/rules/). Project skills: [`.cursor/skills/`](.cursor/skills/).
 
-Rules:
-- For codebase questions, first run `graphify query "<question>"` when graphify-out/graph.json exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
-- Dirty graphify-out/ files are expected after hooks or incremental updates; dirty graph files are not a reason to skip graphify. Only skip graphify if the task is about stale or incorrect graph output, or the user explicitly says not to use it.
-- If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
-- Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
-- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
+## CodeGraph
 
-## Project guidance
+<!-- codegraph:begin -->
+This project is indexed with [CodeGraph](https://github.com/colbymchenry/codegraph) (`.codegraph/`). MCP server config: [`.cursor/mcp.json`](.cursor/mcp.json).
 
-This is an Electron/TypeScript tool for designing Warcraft III Reforged UI frames and exporting them as JASS, Lua, or TypeScript code for use in maps.
+For codebase questions, use CodeGraph MCP **before** grep or broad file reads:
 
-Use the matching project skill before deeper work:
-- `wc3-ui-designer` for editor state, frame movement, menus, persistence, save/load, and general editor behavior.
-- `wc3-undo-commands` when a frame mutation must be undoable/redoable — authoring or changing a `Commands/Implementation/` command (hide, reorder, reparent, batch move, etc.).
-- `wc3-export-safety` for export templates, generated Warcraft III code, frame event triggers, TOC/FDF handling, and map-import behavior.
+- `codegraph_explore` — architecture, flows, relevant symbol source in one call
+- `codegraph_search` — find symbols by name
+- `codegraph_callers` / `codegraph_callees` / `codegraph_impact` — call graph and change impact
+- `codegraph_node` — full source for one symbol
 
-Keep changes clean, minimal, and aligned with the existing project structure. Do not over-engineer helper functions. Remove dead code during reworks.
+The index auto-syncs on file changes while the MCP server is connected. Trust CodeGraph results; only `Read` files flagged in a staleness banner.
 
-Important local conventions:
-- `src/ts/app.ts` starts Electron and `src/ts/main.ts` owns the main process window.
-- `src/ts/renderer.ts` initializes renderer-side editor services.
-- `ProjectTree`, `FrameComponent`, `CustomComplex`, and `FrameBuilder` are the core frame state model.
-- `Commands/Implementation/` classes should be used for undoable frame mutations.
-- `Export.ts`, `Templates.ts`, and `FrameMLText.ts` produce generated JASS/Lua/TypeScript.
-- `app/`, `Build/`, and `dist/` are build outputs; avoid editing them unless explicitly requested.
+Skill: `.cursor/skills/codegraph`
+<!-- codegraph:end -->
 
-When working on generated Warcraft III code, explicitly consider memory leaks, cleanup, async/timer behavior, trigger duplication, initialization order, and desync risks.
+## Skill routing
 
-Verification:
-- Run `npm run compile-ts` after TypeScript changes.
-- Run `npm run lint` when touching broad TypeScript areas or style-sensitive code.
-- `npm run start` requires the `src/ts/configMain.ts` file described in `README.md`.
+| Task | Skill |
+|------|-------|
+| Editor state, frames, menus, persistence | `wc3-ui-designer` |
+| Undoable frame mutations (Ctrl+Z) | `wc3-undo-commands` |
+| Export templates, JASS/Lua/TS, TOC/FDF | `wc3-export-safety` |
+| Architecture / codebase navigation | `codegraph` |
+
+Use the matching skill from `.cursor/skills/` before deeper work.
+
+## Verification
+
+- `npm run compile-ts` after TypeScript changes
+- `npm run lint` for broad or style-sensitive edits
+- `npm run start` requires `src/ts/configMain.ts` (see README.md)
+
+When changing generated Warcraft III code, consider memory leaks, cleanup, async/timer behavior, trigger duplication, initialization order, and desync risks.

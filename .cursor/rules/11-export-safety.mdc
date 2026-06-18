@@ -1,0 +1,22 @@
+---
+description: Warcraft III export safety checklist for generated map code
+globs: src/ts/ClassesAndFunctions/Export.ts,src/ts/Templates/**,src/ts/Editor/FrameLogic/FrameRequire.ts
+alwaysApply: false
+---
+
+# Export Safety
+
+Changes here affect generated JASS/Lua/TypeScript shipped to maps.
+
+## Risk checklist
+
+- **Memory leaks** — `CreateTrigger()` and handles persist; include cleanup or document why permanent
+- **Trigger duplication** — check `BlzTriggerRegisterFrameEvent` for double registration and naming collisions
+- **Async/timers** — avoid non-deterministic waits in UI init unless necessary
+- **Desync** — no `GetLocalPlayer()` branches that create/destroy frames or triggers per player
+- **Init order** — `BlzLoadTOCFile` before frames needing external FDF
+- **Naming** — valid identifiers; preserve `FRvar`/`FRvrr` placeholder behavior
+
+Verify all export languages, not just the reported one.
+
+Full checklist: `.cursor/skills/wc3-export-safety/SKILL.md`

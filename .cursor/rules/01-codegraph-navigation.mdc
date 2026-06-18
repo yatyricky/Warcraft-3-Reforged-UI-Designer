@@ -1,0 +1,27 @@
+---
+description: CodeGraph navigation — query the index before grep or broad file reads
+alwaysApply: true
+---
+
+# CodeGraph
+
+This project uses [CodeGraph](https://github.com/colbymchenry/codegraph) (`.codegraph/`). The MCP server auto-syncs on file changes — no manual re-index step.
+
+## Before exploring the codebase
+
+Use CodeGraph MCP tools **before** grep/read loops:
+
+| Intent | Tool |
+|--------|------|
+| How does X work? / architecture / flow | `codegraph_explore` |
+| Locate a symbol by name | `codegraph_search` |
+| What calls this? / blast radius | `codegraph_callers` / `codegraph_impact` |
+| What does this call? | `codegraph_callees` |
+| One symbol's full source | `codegraph_node` (with `includeCode`) |
+| Index health / pending sync | `codegraph_status` |
+
+Trust CodeGraph results — do not re-verify with grep. If a response includes a staleness banner for edited files, `Read` those specific files only.
+
+Answer structural questions directly with one `codegraph_explore` call when possible; avoid delegating to explore subagents for symbol lookup.
+
+Full workflow: `.cursor/skills/codegraph/SKILL.md`

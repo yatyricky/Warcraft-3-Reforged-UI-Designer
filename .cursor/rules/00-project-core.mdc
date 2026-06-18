@@ -1,0 +1,38 @@
+---
+description: Core WC3 UI Designer project conventions and verification
+alwaysApply: true
+---
+
+# WC3 UI Designer — Core
+
+Electron/TypeScript tool for designing Warcraft III Reforged UI frames and exporting JASS, Lua, or TypeScript for maps.
+
+## Entry points
+
+- `src/ts/app.ts` → `src/ts/main.ts` (main process)
+- `src/ts/renderer.ts` (renderer bootstrap)
+
+## Core model
+
+- `ProjectTree`, `FrameComponent`, `CustomComplex`, `FrameBuilder` — frame state
+- `Commands/Implementation/` — undoable mutations
+- `Export.ts`, `Templates.ts`, `FrameMLText.ts` — generated map code
+
+## Rules
+
+- Keep changes minimal; match existing class layout. Remove dead code during reworks.
+- Do not edit build outputs in `app/`, `Build/`, or `dist/` unless explicitly requested.
+- Route undoable frame mutations through command classes, not direct frame setters.
+- Preserve save-file compatibility; load new persisted fields defensively.
+
+## Verification
+
+- `npm run compile-ts` after TypeScript changes
+- `npm run lint` for broad or style-sensitive edits
+- `npm run start` requires `src/ts/configMain.ts` (see README.md)
+
+## Skills
+
+- General editor work → `.cursor/skills/wc3-ui-designer`
+- Undo/redo commands → `.cursor/skills/wc3-undo-commands`
+- Export templates / generated WC3 code → `.cursor/skills/wc3-export-safety`

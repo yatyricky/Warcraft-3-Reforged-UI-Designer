@@ -32,4 +32,3 @@ Use this skill for general work in this repo.
 - For code changes, run `npm run compile-ts` first. Run `npm run lint` when the change touches style-sensitive TypeScript or broad modules.
 - `npm run start` rebuilds and launches Electron, but it requires `src/ts/configMain.ts` as described in `README.md`.
 - If adding or changing generated Warcraft III code, inspect the exported strings manually in addition to TypeScript compilation.
-

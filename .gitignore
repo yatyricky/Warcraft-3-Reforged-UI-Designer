@@ -7,6 +7,9 @@ node_modules
 .env
 electron-builder.env
 RUI - Overhauled.rar
-graphify-out/manifest.json    
-graphify-out/cost.json     
-graphify-out/cache/         
+.codegraph/*.db
+.codegraph/*.db-wal
+.codegraph/*.db-shm
+.codegraph/cache/
+.codegraph/*.log
+.codegraph/.dirty

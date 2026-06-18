@@ -1,0 +1,24 @@
+---
+description: Undo/redo command pattern for frame mutations
+globs: src/ts/Commands/**
+alwaysApply: false
+---
+
+# Undo/Redo Commands
+
+User-visible frame changes that should participate in Ctrl+Z / Ctrl+Y must use `SimpleCommand` subclasses in `Commands/Implementation/`.
+
+## Pattern
+
+- `action()` — push undo, call `pureAction()`
+- `undo()` — restore old value, then `super.undo()`
+- `pureAction()` — capture old value, apply new value
+- Store frame refs **by name** (`frame.getName()`), re-resolve via `ProjectTree.getInstance().findByName()`
+
+## Rules
+
+- One user action = one command = one undo step
+- Never bypass the stack with direct `frame.setX()` for undoable changes
+- Reference: `ChangeFrameHidden.ts` (minimal), `MoveFramesBatch*` / `ChangeFrameOrder` (batch)
+
+Full authoring steps: `.cursor/skills/wc3-undo-commands/SKILL.md`
