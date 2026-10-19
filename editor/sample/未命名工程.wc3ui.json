@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "name": "未命名工程",
+  "libraryName": "MYUI",
+  "settings": {
+    "background": "custom",
+    "backgroundImage": "blob:http://localhost:5273/5bdbae52-be5a-410c-ad6d-87cfc2fb1f25",
+    "showSafeArea": true,
+    "showGrid": false
+  },
+  "root": {
+    "name": "ROOT",
+    "type": "FRAME",
+    "active": true,
+    "visible": true,
+    "raycastTarget": false,
+    "layout": {
+      "anchorMin": {
+        "x": 0,
+        "y": 0
+      },
+      "anchorMax": {
+        "x": 1,
+        "y": 1
+      },
+      "anchoredPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "sizeDelta": {
+        "x": 0,
+        "y": 0
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "props": {
+      "texture": "",
+      "texturePreviewPath": "",
+      "text": "",
+      "color": "#ffffff",
+      "textScale": 1,
+      "textHorAlign": "center",
+      "textVerAlign": "middle",
+      "value": 100,
+      "min": 0,
+      "max": 100,
+      "trigVar": "",
+      "onClickFunc": "",
+      "onMouseEnterFunc": "",
+      "onMouseLeaveFunc": ""
+    },
+    "children": []
+  }
+}

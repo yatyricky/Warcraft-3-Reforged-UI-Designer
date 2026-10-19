@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+/*
+ * WC3 UI Editor — dark theme.
+ * Palette echoes the gold/amber of Warcraft III UI on a neutral dark ground.
+ */
+:root {
+  --ed-bg: #18191b;
+  --ed-panel: #202226;
+  --ed-panel-2: #26282d;
+  --ed-border: #34363c;
+  --ed-text: #d6d3cd;
+  --ed-text-dim: #8b8a86;
+  --ed-accent: #e8a33d;
+  --ed-accent-dim: #8a6224;
+  --ed-select: #e8a33d;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: var(--ed-bg);
+  color: var(--ed-text);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---- shared panel chrome ---- */
+.ed-panel {
+  background: var(--ed-panel);
+  border-color: var(--ed-border);
+}
+
+.ed-input {
+  background: var(--ed-bg);
+  border: 1px solid var(--ed-border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: var(--ed-text);
+  font-size: 12px;
+  outline: none;
+  min-width: 0;
+  user-select: text;
+  -webkit-user-select: text;
+}
+.ed-input:focus {
+  border-color: var(--ed-accent-dim);
+}
+.ed-input:disabled {
+  opacity: 0.45;
+}
+select.ed-input {
+  cursor: pointer;
+}
+input[type="checkbox"].ed-check {
+  accent-color: var(--ed-accent);
+  width: 13px;
+  height: 13px;
+  cursor: pointer;
+}
+input[type="color"].ed-color {
+  padding: 0;
+  border: 1px solid var(--ed-border);
+  border-radius: 4px;
+  background: var(--ed-bg);
+  width: 100%;
+  height: 22px;
+  cursor: pointer;
+}
+input[type="range"].ed-range {
+  accent-color: var(--ed-accent);
+}
+
+.ed-btn {
+  border: 1px solid var(--ed-border);
+  background: var(--ed-panel-2);
+  color: var(--ed-text);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ed-btn:hover:not(:disabled) {
+  border-color: var(--ed-accent-dim);
+  color: #fff;
+}
+.ed-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.ed-btn.primary {
+  background: var(--ed-accent-dim);
+  border-color: var(--ed-accent-dim);
+  color: #fff;
+}
+.ed-btn.primary:hover:not(:disabled) {
+  background: var(--ed-accent);
+  border-color: var(--ed-accent);
+}
+.ed-btn.icon {
+  padding: 3px 6px;
+  line-height: 1;
+}
+
+.ed-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--ed-text-dim);
+  text-transform: uppercase;
+}
+
+.ed-tooltip-host:hover .ed-tooltip {
+  display: block;
+}
+.ed-tooltip {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  background: #111214;
+  border: 1px solid var(--ed-border);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  color: var(--ed-text);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ---- canvas ---- */
+.ed-canvas-container {
+  background:
+    radial-gradient(ellipse at 50% 40%, #26282c 0%, #141517 70%);
+  overflow: hidden;
+  position: relative;
+}
+
+.ed-frame-label {
+  font-family: Consolas, monospace;
+}
+
+/* thin scrollbars for panels */
+.ed-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.ed-scroll::-webkit-scrollbar-thumb {
+  background: #3a3c42;
+  border-radius: 4px;
+}
+.ed-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}

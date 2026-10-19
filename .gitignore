@@ -13,3 +13,6 @@ RUI - Overhauled.rar
 .codegraph/cache/
 .codegraph/*.log
 .codegraph/.dirty
+# editor (new web app)
+editor/node_modules
+editor/dist
